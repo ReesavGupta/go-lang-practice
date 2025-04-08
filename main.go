@@ -5,6 +5,9 @@ import "fmt"
 func fibo(num int) []int {
 	var series []int = make([]int, num)
 
+	i := "asdas"
+	fmt.Printf("this is iiiiii: %s", i)
+
 	for i := range num {
 
 		if i == 0 {
