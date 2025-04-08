@@ -13,11 +13,11 @@ func conditionals() (int, error) {
 
 	var err error
 
-	fmt.Printf("this is err: %v \n", err)
 	var ans int
 
 	if num2 == 0 {
 		err = errors.New(`denominator is 0`)
+		return 0, err
 	} else {
 		ans = num1 % num2
 	}

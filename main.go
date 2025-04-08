@@ -34,8 +34,11 @@ func main() {
 	result, err := conditionals()
 
 	if err != nil {
-		fmt.Printf("this is yout result %v", result)
+		fmt.Printf("%s", err.Error())
 	} else {
-		fmt.Printf("this is your error %v", err)
+		fmt.Printf("this is yout result %v", result)
 	}
+
+	fmt.Printf("\n*******this is arr*********")
+	arrays()
 }
