@@ -44,4 +44,8 @@ func main() {
 
 	fmt.Printf("\n*******this is arr*********")
 	arrays()
+
+	stringss()
+
+	structsInterfaces()
 }

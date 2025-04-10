@@ -5,7 +5,7 @@ import "fmt"
 func arrays() {
 	// arrays are of fixed size whereaas the sizes of a slice is variable
 	var arrSlice = []int64{1, 2, 3}
-	
+
 	var myArr = [...]string{"hello", "what are you doing"}
 
 	// myArr = append(myArr, "what is up nigguh") doesn't work
@@ -37,5 +37,18 @@ func arrays() {
 
 	// to iterate over a map or an array you can use the for range or the traditional for
 
-	for key := range
+	for key, value := range mymap {
+		fmt.Printf("\nThis is the key: %v and this is its value: %v", key, value)
+	}
+
+	// you can create a while loop in go as:
+	i := 0
+	for {
+		if i >= 10 {
+			fmt.Printf("\nwe are here")
+			break
+		}
+		i++
+		fmt.Printf("\nThis is i: %d", i)
+	}
 }
