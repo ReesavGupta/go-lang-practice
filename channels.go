@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"time"
 )
 
@@ -9,8 +10,8 @@ import (
 // channels are thread safe.
 // we can listen for data when added or removed
 
-var c = make(chan int) // unbuffered channel
-// var c = make(chan int, 5)  // c : [0,1,2,3,4]
+// var c = make(chan int) // unbuffered channel
+var c = make(chan int, 5) // c : [0,1,2,3,4]
 // buffered channel can hold multiple values without popping out the current value.
 
 func channels() {
@@ -58,5 +59,50 @@ func process() {
 	// now what happens in the main func is that since there are 5 values in the buffered channel the we start to read the values off the channel with a second of delay sugggesting that we are doing some work which takes a second
 
 	// but when we use a unbuffered channel what happens is we add a value to the buffer and we read the value out of it concurrently. which makes the rest of the process function wait.
+	// If the channel were unbuffered, the sender (process()) would block on each send until the receiver (channels()) reads it — making it a synchronous handshake.
+}
 
+var chickenChannel = make(chan string)
+var eggChannel = make(chan string)
+
+var MAX_CHICKEN_PRICE float32 = 5
+var MAX_EGG_PRICE float32 = 2
+
+func example() {
+	var websites = []string{"wallmart.com", "amazon.com", "flipkart.com"}
+
+	for i := range websites {
+		go checkChickenPrices(websites[i], chickenChannel)
+		go checkEggPrices(websites[i], eggChannel)
+	}
+
+	sendMessage(chickenChannel, eggChannel)
+}
+func checkChickenPrices(website string, chickenChannel chan string) {
+	for {
+		chickenPrice := rand.Float32() * 20
+
+		if chickenPrice <= MAX_CHICKEN_PRICE {
+			chickenChannel <- website
+			break
+		}
+	}
+}
+func checkEggPrices(website string, eggChanel chan string) {
+	for {
+		eggPrice := rand.Float32() * 10
+
+		if eggPrice <= MAX_EGG_PRICE {
+			eggChanel <- website
+			break
+		}
+	}
+}
+func sendMessage(chickenChannel chan string, eggChannel chan string) {
+	select {
+	case website := <-chickenChannel:
+		fmt.Printf("\nFound a deal on chicken at : %v", website)
+	case website := <-eggChannel:
+		fmt.Printf("\nFound a deal on chicken at : %v", website)
+	}
 }

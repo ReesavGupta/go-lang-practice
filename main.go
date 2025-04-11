@@ -55,4 +55,6 @@ func main() {
 	fmt.Printf("\nthese are your routines: %v", routines)
 
 	channels()
+
+	example()
 }
