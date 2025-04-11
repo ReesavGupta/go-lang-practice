@@ -53,4 +53,6 @@ func main() {
 	routines := goRoutiens()
 
 	fmt.Printf("\nthese are your routines: %v", routines)
+
+	channels()
 }
