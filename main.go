@@ -34,6 +34,7 @@ func main() {
 	var fibSeries []int = fibo(num)
 
 	fmt.Printf("This is the fibSeries for length %d: %v\n", num, fibSeries)
+
 	result, err := conditionals()
 
 	if err != nil {
@@ -48,4 +49,8 @@ func main() {
 	stringss()
 
 	structsInterfaces()
+
+	routines := goRoutiens()
+
+	fmt.Printf("\nthese are your routines: %v", routines)
 }
